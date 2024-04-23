@@ -2,6 +2,11 @@ import os
 from datetime import datetime
 from rembg import remove
 
+# Ahorita toma como parametro un directorio con imagenes como input
+# y guarda las imagenes sin fondo en otro directorio de salida respaldando las originales
+# Se necesitaria de cambiar la logicapara que reciva las imagenes de una peticion HTTP
+# y las almacene en nuestra DB de prendas
+
 
 class BackgroudRemover:
     def __init__(self, input_folder, output_folder) -> None:
