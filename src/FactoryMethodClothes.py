@@ -5,9 +5,13 @@ Intent: Provides an interface for creating objects in a superclass, but allows
 subclasses to alter the type of objects that will be created.
 """
 
-
 from __future__ import annotations
 from abc import ABC, abstractmethod
+from ultralytics import YOLO
+from rembg import remove
+
+
+model = YOLO('model/clothes_classification.pt')
 
 
 class Creator(ABC):
@@ -56,23 +60,41 @@ class ConcreteCreator1(Creator):
     way the Creator can stay independent of concrete product classes.
     """
 
-    def factory_method(self) -> Product:
-        return ConcreteProduct1()
+    def factory_method(self) -> Clothe:
+        return ConcreteButtomClothe()
 
 
 class ConcreteCreator2(Creator):
-    def factory_method(self) -> Product:
+    def factory_method(self) -> Clothe:
         return ConcreteProduct2()
 
 
-class Product(ABC):
+class Clothe(ABC):
     """
     The Product interface declares the operations that all concrete products
     must implement.
     """
 
+    def remove_backgroud_images(self, input_image, output_image):
+        if input_image.endswith(('.png', 'jpg', 'jpeg')):
+            with open(input_image, 'rb') as inp, open(output_image, 'wb') as outp:
+                backgroud_output = remove(inp.read())
+                outp.write(backgroud_output)
+        else:
+            print("The file is not valid")
+
+    def do_detection(self, image) -> str:
+        results = model(image, verbose=False)
+        for r in results:
+            probs = r.probs  # Probs object for classification outputs
+            names = r.names
+            clothe = probs.top1
+
+        clothing_detected = names[clothe]
+        return clothing_detected
+
     @abstractmethod
-    def operation(self) -> str:
+    def do_classification(self, image):
         pass
 
 
@@ -81,12 +103,16 @@ Concrete Products provide various implementations of the Product interface.
 """
 
 
-class ConcreteProduct1(Product):
-    def operation(self) -> str:
-        return "{Result of the ConcreteProduct1}"
+class ConcreteButtomClothe(Clothe):
+    def do_classification(self, image):
+        clothe_type = super().do_detection(image)
+        if clothe_type == "shorts" or "skirt" or "pants":
+            return "bottom"
+        else:
+            return "not bottom"
 
 
-class ConcreteProduct2(Product):
+class ConcreteProduct2(Clothe):
     def operation(self) -> str:
         return "{Result of the ConcreteProduct2}"
 
