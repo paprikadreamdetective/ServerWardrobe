@@ -1,10 +1,3 @@
-"""
-Factory Method Design Pattern
-
-Intent: Provides an interface for creating objects in a superclass, but allows
-subclasses to alter the type of objects that will be created.
-"""
-
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from ultralytics import YOLO
@@ -14,68 +7,62 @@ from rembg import remove
 model = YOLO('model/clothes_classification.pt')
 
 
-class Creator(ABC):
-    """
-    The Creator class declares the factory method that is supposed to return an
-    object of a Product class. The Creator's subclasses usually provide the
-    implementation of this method.
-    """
-
+class Clothe(ABC):
+    
     @abstractmethod
-    def factory_method(self):
-        """
-        Note that the Creator may also provide some default implementation of
-        the factory method.
-        """
+    def do_classification(self):
         pass
 
-    def some_operation(self) -> str:
-        """
-        Also note that, despite its name, the Creator's primary responsibility
-        is not creating products. Usually, it contains some core business logic
-        that relies on Product objects, returned by the factory method.
-        Subclasses can indirectly change that business logic by overriding the
-        factory method and returning a different type of product from it.
-        """
+class ButtomClothe(Clothe):
+    def __init__(self, classification):
+        self.classification = classification
+        self.c_type = None
 
-        # Call the factory method to create a Product object.
-        product = self.factory_method()
+    def do_classification(self):
+        if self.classification in ["shorts", "skirt", "pants"]:
+            self.c_type = "bottom"
+        else:
+            return "not bottom"
+        
+class TopClothe(Clothe):
+    def __init__(self, classification):
+        self.classification = classification
+        self.c_type = None
 
-        # Now, use the product.
-        result = f"Creator: The same creator's code has just worked with {product.operation()}"
+    def do_classification(self):
+        if self.classification in ["dress", "longsleeve", "outwear", "shirt", "t-shirt"]:
+            self.c_type = "top"
+        else:
+            return "not top"
+        
+class Shoes(Clothe):
+    def __init__(self, classification):
+        self.classification = classification
+        self.c_type = None
 
-        return result
+    def do_classification(self):
+        if self.classification == "shoes":
+            self.c_type = "shoes"
+        else:
+            return "not shoes"
 
+class Accessory(Clothe):
+    def __init__(self, classification):
+        self.classification = classification
+        self.c_type = None
 
-"""
-Concrete Creators override the factory method in order to change the resulting
-product's type.
-"""
+    def do_classification(self):
+        if self.classification == "hat":
+            self.c_type = "hat"
+        else:
+            return "not hat"
+        
+class Creator(ABC):
+    @abstractmethod
+    def factory_method(self, clss):
+        pass
 
-
-class ConcreteCreator1(Creator):
-    """
-    Note that the signature of the method still uses the abstract product type,
-    even though the concrete product is actually returned from the method. This
-    way the Creator can stay independent of concrete product classes.
-    """
-
-    def factory_method(self) -> Clothe:
-        return ConcreteButtomClothe()
-
-
-class ConcreteCreator2(Creator):
-    def factory_method(self) -> Clothe:
-        return ConcreteProduct2()
-
-
-class Clothe(ABC):
-    """
-    The Product interface declares the operations that all concrete products
-    must implement.
-    """
-
-    def remove_backgroud_images(self, input_image, output_image):
+    def _remove_backgroud_image(self, input_image, output_image):
         if input_image.endswith(('.png', 'jpg', 'jpeg')):
             with open(input_image, 'rb') as inp, open(output_image, 'wb') as outp:
                 backgroud_output = remove(inp.read())
@@ -86,52 +73,53 @@ class Clothe(ABC):
     def do_detection(self, image) -> str:
         results = model(image, verbose=False)
         for r in results:
-            probs = r.probs  # Probs object for classification outputs
+            probs = r.probs
             names = r.names
             clothe = probs.top1
 
         clothing_detected = names[clothe]
         return clothing_detected
 
-    @abstractmethod
-    def do_classification(self, image):
-        pass
+    def operation(self, in_image, out_image) -> str:
 
+        self._remove_backgroud_image(in_image, out_image)
+        clothe_class = self.do_detection(out_image)
+        clothe = self.factory_method(clothe_class)
+        result = f"vlv el creador\n{clothe.do_classification()}\n{clothe_class}\n{clothe.c_type}"
 
-"""
-Concrete Products provide various implementations of the Product interface.
-"""
+        return result
+    
+class CreatorButtom(Creator):
+    def factory_method(self, clss) -> Clothe:
+        return ButtomClothe(clss)
+    
+class CreatorTop(Creator):
+    def factory_method(self, clss) -> Clothe:
+        return TopClothe(clss)
 
-
-class ConcreteButtomClothe(Clothe):
-    def do_classification(self, image):
-        clothe_type = super().do_detection(image)
-        if clothe_type == "shorts" or "skirt" or "pants":
-            return "bottom"
-        else:
-            return "not bottom"
-
-
-class ConcreteProduct2(Clothe):
-    def operation(self) -> str:
-        return "{Result of the ConcreteProduct2}"
-
-
+class CreatorShoes(Creator):
+    def factory_method(self, clss) -> Clothe:
+        return Shoes(clss)
+    
+class CreatorAccessory(Creator):
+    def factory_method(self, clss) -> Clothe:
+        return Accessory(clss)
+    
 def client_code(creator: Creator) -> None:
-    """
-    The client code works with an instance of a concrete creator, albeit through
-    its base interface. As long as the client keeps working with the creator via
-    the base interface, you can pass it any creator's subclass.
-    """
 
     print(f"Client: I'm not aware of the creator's class, but it still works.\n"
-          f"{creator.some_operation()}", end="")
-
-
+          f"{creator.operation("OG.jpg", "out.png")}", end="")
+    
 if __name__ == "__main__":
     print("App: Launched with the ConcreteCreator1.")
-    client_code(ConcreteCreator1())
+    client_code(CreatorButtom())
     print("\n")
 
     print("App: Launched with the ConcreteCreator2.")
-    client_code(ConcreteCreator2())
+    client_code(CreatorTop())
+    print("\n")
+    print("App: Launched with the ConcreteCreator2.")
+    client_code(CreatorShoes())
+    print("\n")
+    print("App: Launched with the ConcreteCreator2.")
+    client_code(CreatorAccessory())
