@@ -1,4 +1,0 @@
-python-dotenv
-rembg
-ultralytics
-dill
