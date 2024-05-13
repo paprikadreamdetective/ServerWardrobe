@@ -42,7 +42,7 @@ def choose_creator(clothe_class):
 
 
 if __name__ == "__main__":
-    image_w_back = "images/outputs/chamarra_w_back.jpg"
-    clothe_class = process_image("images/inputs/chamarra.jpg", image_w_back)
-    print(clothe_class)
+    image_w_back = "images/outputs/pantalon_w_back.png"
+    clothe_class = process_image("images/inputs/pantalones.jpg", image_w_back)
+    # print(clothe_class)
     client_code(choose_creator(clothe_class), image_w_back, clothe_class)

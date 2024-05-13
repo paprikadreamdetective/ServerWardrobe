@@ -63,7 +63,7 @@ class OutfitFactory(ABC):
 class WeatherBasedOutfitFactory(OutfitFactory):
     def create_outfit(self, color_clothe) -> tuple:
         # color_clothe = self.recognize_predominant_color(image_path)
-        
+
         matching_bottom_colors = matching_colors(
             color_clothe, self.bottom_color_list, self.tolerance)
         matching_top_colors = matching_colors(
@@ -91,7 +91,8 @@ class WeatherBasedOutfitFactory(OutfitFactory):
 def client_code(factory: OutfitFactory, color_predominant: tuple) -> None:
     top, bottom, shoes = factory.create_outfit(color_predominant)
     if top and bottom and shoes:
-        print(f"Outfit recommendation:\nTop: {top}\nBottom: {bottom}\nShoes: {shoes}")
+        print(f"Outfit recommendation:\nTop: {
+              top}\nBottom: {bottom}\nShoes: {shoes}")
     else:
         print("No matching outfit found for the given image.")
 
@@ -130,14 +131,14 @@ if __name__ == "__main__":
     tolerance = 50  # Puedes ajustar este valor según tus necesidades
 
     factory = WeatherBasedOutfitFactory(
-        bottom_color_list, 
-        top_color_list, 
-        shoes_color_list, 
+        bottom_color_list,
+        top_color_list,
+        shoes_color_list,
         tolerance
     )
-    
+
     image_path = "images/outputs/out.png"
 
     color_predominant = (100, 50, 30)
-    
-    client_code(factory, color_predominant)
+
+    # client_code(factory, color_predominant)
