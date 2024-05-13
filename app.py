@@ -1,12 +1,12 @@
 from flask import Flask
 #from flask_migrate import Migrate
-#from routes.blueprint import blueprint
+from routes.blueprint import blueprint
 #from models.machine import db
 
 
 def create_app():
     app = Flask(__name__)  # flask app object
-    #app.config.from_object('config')  # Configuring from Python Files
+    app.config.from_object('config')  # Configuring from Python Files
 
     #db.init_app(app)  # Initializing the database
     return app
@@ -14,7 +14,7 @@ def create_app():
 
 app = create_app()  # Creating the app
 # Registering the blueprint
-#app.register_blueprint(blueprint, url_prefix='/machines')
+app.register_blueprint(blueprint, url_prefix='/machines')
 #migrate = Migrate(app, db)  # Initializing the migration
 
 
