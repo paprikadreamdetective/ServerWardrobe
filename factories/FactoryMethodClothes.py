@@ -3,7 +3,22 @@ from abc import ABC, abstractmethod
 from PIL import Image
 import numpy as np
 
+class ImageProcessingService(ABC):
+    @abstractmethod
+    def process_image(self, image):
+        pass
 
+class RealImageProcessingService(ImageProcessingService):
+    def process_image(self, image):
+        pass
+
+class ProxyImageProcessingService(ImageProcessingService):
+    def __init__(self, real_service: ImageProcessingService):
+        self._real_service = real_service
+
+    def process_image(self, image):
+        return self._real_service.process_image(image)
+        
 class Clothe(ABC):
     @property
     @abstractmethod
@@ -78,6 +93,7 @@ class Creator(ABC):
 
     def operation(self, image, clothe_class) -> str:
         try:
+            image_service = ProxyImageProcessingService(self.factory_method(clothe_class))
             clothe = self.factory_method(clothe_class)
             clothe.color = self.recognize_predominant_color(image)
             result = f"Creator operation:\n\tClothing detected: {clothe_class}\n\tClothing type: {
