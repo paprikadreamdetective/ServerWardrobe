@@ -16,7 +16,9 @@ def login():
     password = request.json['password']
     if user_auth(email, password):
         print("Datos correctos")
+        return jsonify({'success': True, 'message': 'Login successful'})
     else:
         print("Datos incorrectos")
+        return jsonify({'success': False, 'message': 'Invalid credentials'})
 
 

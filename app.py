@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 #from flask_migrate import Migrate
 #from routes.blueprint import blueprint
 #from models.machine import db
@@ -6,6 +7,7 @@ from flask import Flask
 
 def create_app():
     app = Flask(__name__)  # flask app object
+    CORS(app)
     #app.config.from_object('config')  # Configuring from Python Files
 
     #db.init_app(app)  # Initializing the database
