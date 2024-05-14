@@ -57,13 +57,23 @@ class OutfitFactory(ABC):
     def create_outfit(self, image_path: str) -> tuple:
         pass
 
+# Proxy del servicio climático
+
+
+class WeatherServiceProxy:
+    def get_weather(self, location: str) -> dict:
+        # Aquí iría la lógica para obtener la información climática
+        # Por simplicidad, solo retornaremos un valor predefinido
+        return {'color_predominant': (100, 50, 30)}
+
 # Fábrica concreta
 
 
 class WeatherBasedOutfitFactory(OutfitFactory):
     def create_outfit(self, color_clothe) -> tuple:
         # color_clothe = self.recognize_predominant_color(image_path)
-
+        weather_info = self.weather_service_proxy.get_weather(location)
+            color_predominant = weather_info.get('color_predominant')
         matching_bottom_colors = matching_colors(
             color_clothe, self.bottom_color_list, self.tolerance)
         matching_top_colors = matching_colors(
@@ -79,7 +89,8 @@ class WeatherBasedOutfitFactory(OutfitFactory):
         # Si no se encuentra una combinación, devolver None para todas las prendas
         return None, None, None
 
-    def __init__(self, bottom_color_list, top_color_list, shoes_color_list, tolerance):
+    def __init__(self, weather_service_proxy, bottom_color_list, top_color_list, shoes_color_list, tolerance):
+        self.weather_service_proxy = weather_service_proxy
         self.bottom_color_list = bottom_color_list
         self.top_color_list = top_color_list
         self.shoes_color_list = shoes_color_list
@@ -129,16 +140,22 @@ if __name__ == "__main__":
 
     # Define una tolerancia
     tolerance = 50  # Puedes ajustar este valor según tus necesidades
+    # Crear una instancia del proxy del servicio climático
+    weather_service_proxy = WeatherServiceProxy()
+
 
     factory = WeatherBasedOutfitFactory(
+        weather_service_proxy,
         bottom_color_list,
         top_color_list,
         shoes_color_list,
         tolerance
     )
-
+    
     image_path = "images/outputs/out.png"
 
     color_predominant = (100, 50, 30)
+  
+    location = "CDMX"
 
-    # client_code(factory, color_predominant)
+    # client_code(factory, color_predominant, location)
