@@ -1,4 +1,4 @@
-from UserServices import UserServices
+from .UserServices import UserServices
 """
     In this script we are going to call
     the sql sentences for the db

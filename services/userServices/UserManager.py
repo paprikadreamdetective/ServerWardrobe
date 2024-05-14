@@ -1,6 +1,8 @@
-from UserCrud import UserCrud
-from ProxyUser import ProxyUser
+from .UserCrud import UserCrud
+from .ProxyUser import ProxyUser
 
 
-proxy = ProxyUser(UserCrud())
-proxy.auth("user", "123")
+def user_auth(username: str, password: str):
+    return ProxyUser(UserCrud()).auth(username, password)
+    #proxy = ProxyUser(UserCrud())
+    #proxy.auth(username, password)

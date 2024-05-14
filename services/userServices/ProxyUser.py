@@ -1,4 +1,4 @@
-from UserServices import UserServices
+from .UserServices import UserServices
 
 class ProxyUser(UserServices):
     """
@@ -10,9 +10,10 @@ class ProxyUser(UserServices):
         self._real_subject = real_subject
 
     def auth(self, username: str, password: str):
+        return self._real_subject.auth(username, password)
         # ...
-        if self._real_subject.auth(username, password):
-            print("Successful")
-        else:
-            print("Not Successful")
+        #if self._real_subject.auth(username, password):
+        #    print("Successful")
+        #else:
+        #    print("Not Successful")
         # ...
