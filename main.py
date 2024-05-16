@@ -1,9 +1,17 @@
 import json
 from pathlib import Path
+
 from ultralytics import YOLO
 from rembg import remove
-from factories.FactoryMethodClothes import CreatorButtom, CreatorTop, CreatorShoes, CreatorAccessory, client_factory
-from factories.AbstractFactoryOutfits import SummerOutfitFactory, WinterOutfitFactory, wear_outfit
+
+from object_creation.FactoryMethodClothes.CreatorButtom import CreatorButtom
+from object_creation.FactoryMethodClothes.CreatorTop import CreatorTop
+from object_creation.FactoryMethodClothes.CreatorShoes import CreatorShoes
+from object_creation.FactoryMethodClothes.CreatorAccessory import CreatorAccessory
+
+from object_creation.AbstractFactoryOutfits.AbstractOutfitFactory import wear_outfit
+from object_creation.AbstractFactoryOutfits.WinterOutfitFactory import WinterOutfitFactory
+from object_creation.AbstractFactoryOutfits.SummerOutfitFactory import SummerOutfitFactory
 
 
 def remove_backgroud_image(input_image, output_image):
