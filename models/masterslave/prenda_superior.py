@@ -1,8 +1,7 @@
 class Slave_PrendaSuperior:
-    def __init__(self, tipo, color, talla):
+    def __init__(self, tipo, color):
         self.tipo = tipo
         self.color = color
-        self.talla = talla
 
     def get_tipo(self):
         return self.tipo
