@@ -1,5 +1,5 @@
 #from models.
-# ControladorAuth
+
 from app import app 
 from flask import request, jsonify
 
