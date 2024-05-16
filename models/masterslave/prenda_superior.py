@@ -9,6 +9,3 @@ class Slave_PrendaSuperior:
 
     def get_color(self):
         return self.color
-
-    def get_talla(self):
-        return self.talla
