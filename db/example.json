@@ -1,0 +1,93 @@
+{
+  "clothes_user": {
+    "top": {
+      "1023": [
+        { "type": "top" },
+        { "classification": "dress" },
+        { "color": "(122, 34, 123)" }
+      ],
+      "1024": [
+        { "type": "top" },
+        { "classification": "longsleeve" },
+        { "color": "(123, 76, 123)" }
+      ],
+      "1025": [
+        { "type": "top" },
+        { "classification": "outwear" },
+        { "color": "(132, 234, 13)" }
+      ],
+      "1026": [
+        { "type": "top" },
+        { "classification": "t-shirt" },
+        { "color": "(12, 123, 222)" }
+      ]
+    },
+
+    "buttom": {
+      "2023": [
+        { "type": "buttom" },
+        { "classification": "pants" },
+        { "color": "(112, 4, 123)" }
+      ],
+      "2024": [
+        { "type": "buttom" },
+        { "classification": "shorts" },
+        { "color": "(1, 224, 123)" }
+      ],
+      "2025": [
+        { "type": "buttom" },
+        { "classification": "skirt" },
+        { "color": "(12, 34, 123)" }
+      ],
+      "2026": [
+        { "type": "buttom" },
+        { "classification": "pants" },
+        { "color": "(12, 34, 123)" }
+      ]
+    },
+    "shoes": {
+      "3023": [
+        { "type": "shoes" },
+        { "classification": "shoes" },
+        { "color": "(3, 102, 252)" }
+      ],
+      "3024": [
+        { "type": "shoes" },
+        { "classification": "shoes" },
+        { "color": "(209, 75, 193)" }
+      ],
+      "3025": [
+        { "type": "shoes" },
+        { "classification": "shoes" },
+        { "color": "(33, 145, 98)" }
+      ],
+      "3026": [
+        { "type": "shoes" },
+        { "classification": "shoes" },
+        { "color": "(12, 3, 45)" }
+      ]
+    },
+    "accessory": {
+      "4023": [
+        { "type": "accessory" },
+        { "classification": "hat" },
+        { "color": "(45, 41, 3)" }
+      ],
+      "4024": [
+        { "type": "accessory" },
+        { "classification": "hat" },
+        { "color": "(222, 111, 23)" }
+      ],
+      "4025": [
+        { "type": "accessory" },
+        { "classification": "hat" },
+        { "color": "(65, 98, 121)" }
+      ],
+      "4026": [
+        { "type": "accessory" },
+        { "classification": "hat" },
+        { "color": "(87, 243, 1)" }
+      ]
+    }
+  }
+}

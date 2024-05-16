@@ -109,7 +109,7 @@ class CreatorAccessory(Creator):
         return Accessory(clss)
 
 
-def client_code(creator: Creator, imagen: str, clothe_class: str) -> None:
+def client_factory(creator: Creator, imagen: str, clothe_class: str) -> None:
     try:
         print("Client: Executing creator operation...")
         print(f"{creator.operation(imagen, clothe_class)}")
@@ -120,4 +120,4 @@ def client_code(creator: Creator, imagen: str, clothe_class: str) -> None:
 # Ejemplo de uso
 if __name__ == "__main__":
     print("App: Launched with the ConcreteCreator1.")
-    client_code(CreatorTop(), "chamarra.jpg", "outwear")
+    client_factory(CreatorTop(), "chamarra.jpg", "outwear")

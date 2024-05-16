@@ -1,144 +1,118 @@
 from abc import ABC, abstractmethod
-
-# Funciones de utilidad para calcular diferencias de colores y encontrar colores coincidentes
-
-
-def calculate_color_difference(color1, color2):
-    return sum(abs(component1 - component2) for component1, component2 in zip(color1, color2))
+import json
+from pathlib import Path
+from pprint import pprint
+import random
 
 
-def color_combines(color_base, color_to_compare, tolerance):
-    difference = calculate_color_difference(color_base, color_to_compare)
-    return difference <= tolerance
+# Abstract Factory
+class AbstractOutfitFactory(ABC):
+    @abstractmethod
+    def create_casual_outfit(self):
+        pass
 
+    @abstractmethod
+    def create_formal_outfit(self):
+        pass
 
-def matching_colors(selected_color, color_list, tolerance):
-    matching_colors = []
-    for color in color_list:
-        if color_combines(selected_color, color, tolerance):
-            matching_colors.append(color)
-    return matching_colors
+    @abstractmethod
+    def create_random_outfit(self, clothes_list) -> dict:
+        """
+        Genera un outfit aleatorio combinando prendas de manera aleatoria.
+        """
 
-# Productos abstractos
+        outfit = {"top": {}, "buttom": {}, "shoes": {}, "accessory": {}}
+        ramdom_outfit = []
 
+        for types in clothes_list:
+            ramdom_clothe = random.choice(list(types))
+            ramdom_outfit.append(ramdom_clothe)
 
+        outfit['top'].update({ramdom_outfit[0]: clothes_list[0][ramdom_outfit[0]]})
+        outfit['buttom'].update({ramdom_outfit[1]: clothes_list[1][ramdom_outfit[1]]})
+        outfit['shoes'].update({ramdom_outfit[2]: clothes_list[2][ramdom_outfit[2]]})
+        outfit['accessory'].update({ramdom_outfit[3]: clothes_list[3][ramdom_outfit[3]]})
+
+        return outfit
+
+# Concrete Factory 1
+class SummerOutfitFactory(AbstractOutfitFactory):
+    def __init__(self, clothes_list: list):
+        self.clothes_list = clothes_list
+
+    def create_casual_outfit(self):
+        return SummerCasualOutfit()
+
+    def create_formal_outfit(self):
+        return SummerFormalOutfit()
+    
+    def create_random_outfit(self) -> dict:
+        return super().create_random_outfit(self.clothes_list)
+
+# Concrete Factory 2
+class WinterOutfitFactory(AbstractOutfitFactory):
+    def __init__(self, clothes_list: list):
+        self.clothes_list = clothes_list
+
+    def create_casual_outfit(self):
+        return WinterCasualOutfit()
+
+    def create_formal_outfit(self):
+        return WinterFormalOutfit()
+    
+    def create_random_outfit(self) -> dict:
+        return super().create_random_outfit(self.clothes_list)
+
+# Abstract Product
 class Outfit(ABC):
-    @abstractmethod
-    def create_outfit(self) -> str:
+    def wear(self):
         pass
 
-# Productos concretos
+# Concrete Products
+class SummerCasualOutfit(Outfit):
+    def wear(self):
+        return "Wear summer casual outfit: t-shirt, shorts, and shoes"
 
+class SummerFormalOutfit(Outfit):
+    def wear(self):
+        return "Wear summer formal outfit: shirt, pants, and shoes"
 
-class ColdCloudyOutfit(Outfit):
-    def create_outfit(self) -> str:
-        return "Cold and cloudy outfit"
+class WinterCasualOutfit(Outfit):
+    def wear(self):
+        return "Wear winter casual outfit: longsleeve, pants, and shoes"
 
+class WinterFormalOutfit(Outfit):
+    def wear(self):
+        return "Wear winter formal outfit: outwear, skirt, and shoes"
 
-class ColdSunnyOutfit(Outfit):
-    def create_outfit(self) -> str:
-        return "Cold and sunny outfit"
+# Client
+def wear_outfit(factory: AbstractOutfitFactory):
+    casual_outfit = factory.create_casual_outfit()
+    formal_outfit = factory.create_formal_outfit()
+    print("Casual Outfit:", casual_outfit.wear())
+    print("Formal Outfit:", formal_outfit.wear())
+    print("Random Outfit:", end=" ")
+    pprint(factory.create_random_outfit())
 
+# Other functions
+def clean_data(data: dict) -> list:
+    clothe_list = [{}, {}, {}, {}]
 
-class SunnyFreshOutfit(Outfit):
-    def create_outfit(self) -> str:
-        return "Sunny and fresh outfit"
+    categories = ["top", "buttom", "shoes", "accessory"]
+    for index, category in enumerate(categories):
+        for item, details in data["clothes_user"][category].items():
+            clothe_list[index][item] = details[2]["color"]
 
+    return clothe_list
 
-class SunnyHotOutfit(Outfit):
-    def create_outfit(self) -> str:
-        return "Sunny and hot outfit"
-
-# Fábrica abstracta
-
-
-class OutfitFactory(ABC):
-    @abstractmethod
-    def create_outfit(self, image_path: str) -> tuple:
-        pass
-
-# Fábrica concreta
-
-
-class WeatherBasedOutfitFactory(OutfitFactory):
-    def create_outfit(self, color_clothe) -> tuple:
-        # color_clothe = self.recognize_predominant_color(image_path)
-
-        matching_bottom_colors = matching_colors(
-            color_clothe, self.bottom_color_list, self.tolerance)
-        matching_top_colors = matching_colors(
-            color_clothe, self.top_color_list, self.tolerance)
-        matching_shoes_colors = matching_colors(
-            color_clothe, self.shoes_color_list, self.tolerance)
-
-        # Encontrar una combinación de colores que se encuentre en todas las listas
-        for color in matching_bottom_colors:
-            if color in matching_top_colors and color in matching_shoes_colors:
-                return color, color, color
-
-        # Si no se encuentra una combinación, devolver None para todas las prendas
-        return None, None, None
-
-    def __init__(self, bottom_color_list, top_color_list, shoes_color_list, tolerance):
-        self.bottom_color_list = bottom_color_list
-        self.top_color_list = top_color_list
-        self.shoes_color_list = shoes_color_list
-        self.tolerance = tolerance
-
-# Cliente
-
-
-def client_code(factory: OutfitFactory, color_predominant: tuple) -> None:
-    top, bottom, shoes = factory.create_outfit(color_predominant)
-    if top and bottom and shoes:
-        print(f"Outfit recommendation:\nTop: {
-              top}\nBottom: {bottom}\nShoes: {shoes}")
-    else:
-        print("No matching outfit found for the given image.")
-
-
-# ejemplo de uso
+# Usage
 if __name__ == "__main__":
-    # Supongamos que tienes listas de colores separadas para diferentes prendas
-    bottom_color_list = [
-        (100, 50, 30),
-        (110, 60, 40),
-        (90, 40, 20),
-        (140, 80, 50),
-        (40, 80, 40),
-        (20, 45, 78)
-    ]
+    with open(Path("./db/example.json")) as f:
+        data = json.load(f)
+    clothes_list = clean_data(data)
 
-    top_color_list = [
-        (100, 50, 30),
-        (120, 70, 40),
-        (90, 40, 20),
-        (140, 80, 50),
-        (31, 60, 40),
-        (20, 45, 78)
-    ]
+    summer_factory = SummerOutfitFactory(clothes_list)
+    wear_outfit(summer_factory)
 
-    shoes_color_list = [
-        (100, 50, 30),
-        (100, 40, 40),
-        (90, 40, 20),
-        (140, 80, 50),
-        (31, 41, 71),
-        (20, 45, 78)
-    ]
-
-    # Define una tolerancia
-    tolerance = 50  # Puedes ajustar este valor según tus necesidades
-
-    factory = WeatherBasedOutfitFactory(
-        bottom_color_list,
-        top_color_list,
-        shoes_color_list,
-        tolerance
-    )
-
-    image_path = "images/outputs/out.png"
-
-    color_predominant = (100, 50, 30)
-
-    # client_code(factory, color_predominant)
+    winter_factory = WinterOutfitFactory(clothes_list)
+    wear_outfit(winter_factory)
