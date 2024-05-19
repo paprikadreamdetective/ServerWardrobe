@@ -19,6 +19,7 @@ def create_app():
 #migrate = Migrate(app, db)  # Initializing the migration
 
 app = create_app()  # Creating the app
+# from controllers import *
 from facadeController import *
 
 if __name__ == '__main__':  # Running the app

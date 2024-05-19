@@ -6,7 +6,6 @@ from .UserServices import UserServices
     the sql sentences for the db
 
 """
-
 class UserCrud(UserServices):
     """
     Define the real object that the proxy represents.
@@ -74,5 +73,5 @@ class UserCrud(UserServices):
             print('Usuario insertado por correo', user)
             return 'Usuario insertado', 200
         except Exception as e:
-            print('Error al insertar usuario por correo', e)
+            print('Error al insertar usuario por', e)
             return 'Error al insertar usuario', 500
