@@ -5,8 +5,9 @@ class authEmail(abc.ABC):
     def loginByEmail(self, email, password):
         pass
     @abc.abstractmethod
-    def registerByEmail(self, email, password):
+    def registerByEmail(self, email, password, name, lastname):
         pass
+    
     '''
     def __init__(self, email, password) -> None:
         self._email = email
