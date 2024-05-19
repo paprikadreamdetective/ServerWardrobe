@@ -3,7 +3,8 @@
 from app import app 
 from flask import request, jsonify
 
-from services.userServices.UserManager import user_auth 
+from models.Authenticate.authManager import user_auth
+#from services.userServices.UserManager import user_auth 
 
 #def index():
 #    return {'status': 'OK',

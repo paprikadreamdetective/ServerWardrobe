@@ -19,8 +19,8 @@ def create_app():
 #migrate = Migrate(app, db)  # Initializing the migration
 
 app = create_app()  # Creating the app
-# from controllers import *
-from facadeController import *
+from controllers.AuthController import * 
+#from facadeController import *
 
 if __name__ == '__main__':  # Running the app
     app.run(host='127.0.0.1', port=5000, debug=True)

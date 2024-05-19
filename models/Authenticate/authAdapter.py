@@ -17,10 +17,17 @@ class Auth(authEmail, authUsername):
     The Target defines the domain-specific interface used by the client code.
     """
     def loginByEmail(self, email, password):
-        self._proxy.auth(email, password)
+        return self._proxy.auth(email, password)
         #ProxyUser(UserCrud()).auth(email, password)
         
+    def loginByUsername(self):
+        pass
+    
+    def registerByEmail(self, email, password):
+        pass
 
+    def registerByUsername(self):
+        pass
 
     '''
 

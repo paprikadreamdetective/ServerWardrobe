@@ -1,11 +1,12 @@
-import mysql.connector
-import json
+#import mysql
+#import json
 from .UserServices import UserServices
 """
     In this script we are going to call
     the sql sentences for the db
 
 """
+'''
 class UserCrud(UserServices):
     """
     Define the real object that the proxy represents.
@@ -75,3 +76,14 @@ class UserCrud(UserServices):
         except Exception as e:
             print('Error al insertar usuario por', e)
             return 'Error al insertar usuario', 500
+'''
+class UserCrud(UserServices):
+    def __init__(self) -> None:
+        pass
+        #self._connection_db_user = self.conectar_bd()
+        #self._close_db_user = 
+    def auth(self, username, password) -> bool:
+        if username == 'user' and password == '123':
+            return True
+        else:
+            return False
