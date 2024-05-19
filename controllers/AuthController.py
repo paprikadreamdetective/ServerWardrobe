@@ -23,4 +23,3 @@ def login():
         print("Datos incorrectos")
         return jsonify({'success': False, 'message': 'Invalid credentials'})
 
-

@@ -20,6 +20,7 @@ def create_app():
 
 app = create_app()  # Creating the app
 from controllers.AuthController import * 
+from controllers.ImageController import * 
 #from facadeController import *
 
 if __name__ == '__main__':  # Running the app
