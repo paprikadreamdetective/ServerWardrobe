@@ -1,9 +1,9 @@
 import json
 from pathlib import Path
 
-from objectCreation.AbstractFactoryOutfits.AbstractOutfitFactory import wear_outfit
-from objectCreation.AbstractFactoryOutfits.WinterOutfitFactory import WinterOutfitFactory
-from objectCreation.AbstractFactoryOutfits.SummerOutfitFactory import SummerOutfitFactory
+from objectCreation.abstractFactoryOutfits.SummerOutfitFactory import SummerOutfitFactory
+from objectCreation.abstractFactoryOutfits.WinterOutfitFactory import WinterOutfitFactory
+from objectCreation.abstractFactoryOutfits.AbstractOutfitFactory import wear_outfit
 
 
 # ---------- Abstract Factory ----------

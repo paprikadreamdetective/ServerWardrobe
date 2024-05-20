@@ -1,8 +1,8 @@
-from objectCreation.FactoryMethodClothes.CreatorButtom import CreatorButtom
-from objectCreation.FactoryMethodClothes.CreatorTop import CreatorTop
-from objectCreation.FactoryMethodClothes.CreatorShoes import CreatorShoes
-from objectCreation.FactoryMethodClothes.CreatorAccessory import CreatorAccessory
-from objectCreation.FactoryMethodClothes.Creator import client_factory
+from objectCreation.factoryMethodClothes.CreatorButtom import CreatorButtom
+from objectCreation.factoryMethodClothes.CreatorTop import CreatorTop
+from objectCreation.factoryMethodClothes.CreatorShoes import CreatorShoes
+from objectCreation.factoryMethodClothes.CreatorAccessory import CreatorAccessory
+from objectCreation.factoryMethodClothes.Creator import client_factory
 from model.imageProcessing.process import process_image
 
 

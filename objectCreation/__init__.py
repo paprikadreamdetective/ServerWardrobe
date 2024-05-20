@@ -1,4 +1,5 @@
-"""Facries:
+"""
+Facries:
 - Abstract Factory
 - Factory Method
 """
