@@ -1,18 +1,14 @@
-from __future__ import annotations
-from wardrobe import Component
+from composite import Composite
 
-class ClotheLeaf(Component):
-    def __init__(self, name: str):
-        self._name = name
-        self._parent: Component = None
-
-    @property
-    def name(self) -> str:
-        return self._name
-
+class OutfitComposite(Composite):
     def operation(self) -> str:
-        return self._name
-
-# Optional: Helper function to create leaves
-def create_clothe(name: str) -> ClotheLeaf:
-    return ClotheLeaf(name)
+        """
+        The Composite executes its primary logic in a particular way. It
+        traverses recursively through all its children, collecting and summing
+        their results. Since the composite's children pass these calls to their
+        children and so forth, the whole object tree is traversed as a result.
+        """
+        results = []
+        for child in self._children:
+            results.append(child.operation())
+        return f"OutfitComposite({'+'.join(results)})"
