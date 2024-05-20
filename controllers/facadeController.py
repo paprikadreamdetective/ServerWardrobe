@@ -4,9 +4,9 @@ import os
 from app import app 
 from flask import request, jsonify
 
-from models.Authenticate.authManager import user_auth
-from models.CaptureClothe.imageManager import sendPictureToPI
-from models.CreateOutfit.cliente import create_outfit
+from model.Authenticate.authManager import user_auth
+from model.CaptureClothe.imageManager import sendPictureToPI
+from model.CreateOutfit.cliente import create_outfit
 
 
 @app.route('/login', methods=['POST'])
@@ -21,7 +21,6 @@ def login():
         print("Datos incorrectos")
         return jsonify({'success': False, 'message': 'Invalid credentials'})
 
-
 @app.route('/upload_picture', methods=['POST'])
 def upload_picture():
     picture = request.files['file']
@@ -34,8 +33,8 @@ def upload_picture():
             return jsonify({"message": "Image received but failed to forward", "error": "ERROR"}), 500
     return jsonify({"message": "No file received"}), 400
  
-@app.route('/create_outfit', methods=['POST'])
-def createOutfit():
+@app.route('/create_manual_outfit', methods=['POST'])
+def create_manual_outfit():
     create_outfit()
 
 @app.route('/get_clothe', methods=['GET'])
@@ -44,4 +43,8 @@ def get_clothe():
 
 @app.route('/register', methods=['POST'])
 def register():
+    pass
+
+@app.route('/create_automatic_outfit', methods=['POST'])
+def generate_outfit():
     pass

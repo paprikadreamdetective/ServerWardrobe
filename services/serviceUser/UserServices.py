@@ -1,6 +1,5 @@
 import abc
 
-
 class UserServices(metaclass=abc.ABCMeta):
     """
     Define the common interface for RealSubject and Proxy so that a

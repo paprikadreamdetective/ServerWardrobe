@@ -7,8 +7,10 @@ def create_app():
     return app
 
 app = create_app()  # Creating the app
-from controllers.AuthController import * 
-from controllers.ImageController import * 
+#from controllers.AuthController import * 
+#from controllers.ImageController import * 
+
+from controllers.facadeController import *
 
 if __name__ == '__main__':  # Running the app
     if not os.path.exists('uploads'):
