@@ -1,11 +1,11 @@
-<<<<<<< HEAD
+
 # import mysql
 #import json
-=======
+
 import mysql
 import json
 from flask import Flask, render_template, request, redirect, url_for, flash
->>>>>>> refs/remotes/origin/facade-f
+
 from .UserServices import UserServices
 """
     In this script we are going to call
