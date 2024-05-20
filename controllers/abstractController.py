@@ -23,7 +23,7 @@ def clean_data(data: dict) -> list:
 if __name__ == "__main__":
 
     # *** Abstract Factory ***
-    with open(Path("./db/example.json")) as f:
+    with open(Path("./services/db/example.json")) as f:
         data = json.load(f)
     clothes_list = clean_data(data)
 
