@@ -2,6 +2,8 @@ from .authAdapter import Auth
 #from serviceUser.ProxyUser import ProxyUser
 #from serviceUser.UserCrud import UserCrud
 
+def user_auth(email: str, password: str):
+    return Auth().auth(email, password)
 
 def user_auth_email(email: str, password: str):
     return Auth().loginByEmail(email, password)

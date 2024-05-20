@@ -1,7 +1,7 @@
 
 # import mysql
 #import json
-
+'''
 import mysql
 import json
 from flask import Flask, render_template, request, redirect, url_for, flash
@@ -187,3 +187,26 @@ class UserCrud(UserServices):
         except Exception as e:
             print('Error al intentar iniciar sesión:', e)
             return 'Error al intentar iniciar sesión', 500
+'''
+
+
+from .UserServices import UserServices
+
+class UserCrud(UserServices):
+    def __init__(self) -> None:
+        pass
+
+    def auth(self, username: str, password: str) -> bool:
+        if username == 'user' and password == '123':
+            return True
+        else:
+            return False
+        
+    def username_login(self, username, password):
+        pass
+    def username_register(self, username, password):
+        pass
+    def email_login(self, username, password):
+        pass
+    def email_register(self, username, password):
+        pass

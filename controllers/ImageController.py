@@ -1,8 +1,23 @@
 import os
 from app import app 
 from flask import request, jsonify
-from models.CaptureClothe.imageManager import user_auth
- 
+from models.CaptureClothe.imageManager import sendPictureToPI
+
+@app.route('/upload_picture', methods=['POST'])
+def upload_picture():
+    picture = request.files['file']
+    if picture:
+        file_path = os.path.join('uploads', picture.filename)
+        picture.save(file_path)
+        if sendPictureToPI(file_path, picture):
+            return jsonify({"message": "Image received and forwarded successfully!", "file_path": file_path})
+        else:
+            return jsonify({"message": "Image received but failed to forward", "error": "ERROR"}), 500
+
+    return jsonify({"message": "No file received"}), 400
+
+
+'''
 RASPBERRY_PI_SERVER_URL = 'http://192.168.10.94:8008/receive_image'
 
 @app.route('/upload_picture', methods=['POST'])
@@ -14,6 +29,7 @@ def upload_picture():
         picture.save(file_path)
         
         # Leer la imagen guardada y enviarla al servidor en la Raspberry Pi
+        
         with open(file_path, 'rb') as image_file:
             files = {'file': (picture.filename, image_file, picture.content_type)}
             response = request.post(RASPBERRY_PI_SERVER_URL, files=files)
@@ -26,8 +42,6 @@ def upload_picture():
 
     return jsonify({"message": "No file received"}), 400
         
-        
-        
-        #return jsonify({"message": "Image received successfully!", "file_path": file_path})
-    #return jsonify({"message": "No file received"}), 400
+'''    
+  
 

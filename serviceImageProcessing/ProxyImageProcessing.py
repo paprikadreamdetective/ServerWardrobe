@@ -8,6 +8,6 @@ class ProxyImageProcessing(ImageProcessingService):
     def __init__(self, real_subject):
         self._real_subject = real_subject
 
-    def send(self, image):
-        return self._real_subject.send(image)
+    def send(self, file_path, image):
+        return self._real_subject.send(file_path, image)
         
