@@ -7,8 +7,8 @@ interfaces to collaborate.
 from .authByEmail import authEmail
 from .authByUsername import authUsername
 
-from serviceUser.ProxyUser import ProxyUser
-from serviceUser.UserCrud import UserCrud
+from services.serviceUser.ProxyUser import ProxyUser
+from services.serviceUser.UserCrud import UserCrud
 
 class Auth(authEmail, authUsername):
     def __init__(self):
