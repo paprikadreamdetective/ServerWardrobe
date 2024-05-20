@@ -1,6 +1,17 @@
+import json
+from pathlib import Path
+
 from ultralytics import YOLO
 from rembg import remove
-from factories.FactoryMethodClothes import CreatorButtom, CreatorTop, CreatorShoes, CreatorAccessory, client_code
+
+from object_creation.FactoryMethodClothes.CreatorButtom import CreatorButtom
+from object_creation.FactoryMethodClothes.CreatorTop import CreatorTop
+from object_creation.FactoryMethodClothes.CreatorShoes import CreatorShoes
+from object_creation.FactoryMethodClothes.CreatorAccessory import CreatorAccessory
+
+from object_creation.AbstractFactoryOutfits.AbstractOutfitFactory import wear_outfit
+from object_creation.AbstractFactoryOutfits.WinterOutfitFactory import WinterOutfitFactory
+from object_creation.AbstractFactoryOutfits.SummerOutfitFactory import SummerOutfitFactory
 
 
 def remove_backgroud_image(input_image, output_image):
@@ -13,6 +24,19 @@ def remove_backgroud_image(input_image, output_image):
 
 
 def do_detection(image) -> str:
+    """
+    Detections :
+        - dress
+        - hat
+        - longsleeve
+        - outwear
+        - pants
+        - shirt
+        - shoes
+        - shorts
+        - skirt
+        - t-shirt
+    """
     model = YOLO('model/clothes_classification.pt')
     results = model(image, verbose=False)
     for r in results:
@@ -39,10 +63,35 @@ def choose_creator(clothe_class):
         return CreatorShoes()
     elif clothe_class == "hat":
         return CreatorAccessory()
+    
+# ---------- Abstract Factory ----------
 
+def clean_data(data: dict) -> list:
+    clothe_list = [{}, {}, {}, {}]
+
+    categories = ["top", "buttom", "shoes", "accessory"]
+    for index, category in enumerate(categories):
+        for item, details in data["clothes_user"][category].items():
+            clothe_list[index][item] = details[2]["color"]
+
+    return clothe_list
+    
 
 if __name__ == "__main__":
-    image_w_back = "images/outputs/pantalon_w_back.png"
-    clothe_class = process_image("images/inputs/pantalones.jpg", image_w_back)
-    # print(clothe_class)
-    client_code(choose_creator(clothe_class), image_w_back, clothe_class)
+    # *** Factory Method ***
+    # image_w_back = "images/outputs/pantalon_w_back.png"
+    # clothe_class = process_image("images/inputs/pantalones.jpg", image_w_back)
+    # # print(clothe_class)
+    # client_code(choose_creator(clothe_class), image_w_back, clothe_class)
+
+    # *** Abstract Factory ***
+    with open(Path("./db/example.json")) as f:
+        data = json.load(f)
+    clothes_list = clean_data(data)
+
+    summer_factory = SummerOutfitFactory(clothes_list)
+    wear_outfit(summer_factory)
+
+    winter_factory = WinterOutfitFactory(clothes_list)
+    wear_outfit(winter_factory)
+
