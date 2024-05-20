@@ -187,15 +187,3 @@ class UserCrud(UserServices):
         except Exception as e:
             print('Error al intentar iniciar sesión:', e)
             return 'Error al intentar iniciar sesión', 500
-
-
-class UserCrud(UserServices):
-    def __init__(self) -> None:
-        pass
-        #self._connection_db_user = self.conectar_bd()
-        #self._close_db_user = 
-    def auth(self, username, password) -> bool:
-        if username == 'user' and password == '123':
-            return True
-        else:
-            return False
