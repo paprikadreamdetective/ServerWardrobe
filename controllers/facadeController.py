@@ -21,8 +21,6 @@ def login():
         print("Datos incorrectos")
         return jsonify({'success': False, 'message': 'Invalid credentials'})
 
-
-
 @app.route('/register_email', methods=['POST'])
 def register_email():
     email = request.json['email']
@@ -36,8 +34,6 @@ def register_email():
     else:
         print("Datos incorrectos")
         return jsonify({'success': False, 'message': 'Invalid credentials'})
-
-
 
 @app.route('/login_username', methods=['POST'])
 def login_username():
@@ -82,6 +78,10 @@ def upload_picture():
 def create_manual_outfit():
     create_outfit()
 
+@app.route('/create_automatic_outfit', methods=['POST'])
+def generate_outfit():
+    pass
+
 @app.route('/get_clothe', methods=['GET'])
 def get_clothe():
     pass
@@ -90,6 +90,6 @@ def get_clothe():
 def register():
     pass
 
-@app.route('/create_automatic_outfit', methods=['POST'])
-def generate_outfit():
+@app.route('/get_current_weather', methods=['GET'])
+def get_current_weather():
     pass
