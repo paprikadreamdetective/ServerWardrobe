@@ -1,12 +1,18 @@
+from __future__ import annotations
+from wardrobe import Component
 
-class Leaf(Component):
-    """
-    The Leaf class represents the end objects of a composition. A leaf can't
-    have any children.
+class ClotheLeaf(Component):
+    def __init__(self, name: str):
+        self._name = name
+        self._parent: Component = None
 
-    Usually, it's the Leaf objects that do the actual work, whereas Composite
-    objects only delegate to their sub-components.
-    """
+    @property
+    def name(self) -> str:
+        return self._name
 
     def operation(self) -> str:
-        return "Leaf"
+        return self._name
+
+# Optional: Helper function to create leaves
+def create_clothe(name: str) -> ClotheLeaf:
+    return ClotheLeaf(name)
