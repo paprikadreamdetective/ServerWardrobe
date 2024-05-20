@@ -1,29 +1,18 @@
 from flask import Flask
 from flask_cors import CORS
-#from flask_migrate import Migrate
-#from routes.blueprint import blueprint
-#from models.machine import db
-
 
 def create_app():
     app = Flask(__name__)  # flask app object
     CORS(app)
-    #app.config.from_object('config')  # Configuring from Python Files
-
-    #db.init_app(app)  # Initializing the database
     return app
-
-
-# Registering the blueprint
-#app.register_blueprint(blueprint, url_prefix='/machines')
-#migrate = Migrate(app, db)  # Initializing the migration
 
 app = create_app()  # Creating the app
 from controllers.AuthController import * 
 from controllers.ImageController import * 
-#from facadeController import *
 
 if __name__ == '__main__':  # Running the app
+    if not os.path.exists('uploads'):
+        os.makedirs('uploads')
     app.run(host='127.0.0.1', port=5000, debug=True)
 
 
