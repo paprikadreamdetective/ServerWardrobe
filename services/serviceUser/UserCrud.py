@@ -198,15 +198,54 @@ class UserCrud(UserServices):
 
     def auth(self, username: str, password: str) -> bool:
         if username == 'user' and password == '123':
+            print("LLEGO AL CRUD TRUE")
             return True
         else:
+            print("LLEGO AL CRUD FALSE")
             return False
         
-    def username_login(self, username, password):
-        pass
-    def username_register(self, username, password):
-        pass
-    def email_login(self, username, password):
-        pass
-    def email_register(self, username, password):
-        pass
+    def username_login(self, username, password) -> bool:
+        if username == 'username' and password == '123':
+            print("LLEGO AL CRUD TRUE")
+            return True
+        else:
+            print("LLEGO AL CRUD FALSE")
+            return False
+
+    def username_register(self, username, password, name, lastname) -> bool:
+        if username and password and name and lastname:
+            print("Recibido: Username:", username, "Password:", password, "Name:", name, "Lastname:", lastname)
+
+            if username == 'user' and password == '123' and name == 'Juan' and lastname == 'Martinez':
+                print("LLEGO AL CRUD TRUE")
+                return True
+            else:
+                print("LLEGO AL CRUD FALSE")
+                return False
+        else:
+            print("Alguno de los datos recibidos es nulo")
+            return False
+        
+        
+    def email_login(self, email, password, name, lastname) -> bool:
+        if email == 'correo@gmail.com' and password == '123':
+            print("LLEGO AL CRUD TRUE")
+            return True
+        else:
+            print("LLEGO AL CRUD FALSE")
+            return False
+        
+
+    def email_register(self, email, password, name, lastname) -> bool:
+        if email and password and name and lastname:
+            print("Recibido: Email:", email, "Password:", password, "Name:", name, "Lastname:", lastname)
+
+            if email == 'correo@gmail.com' and password == '123' and name == 'Juan' and lastname == 'Martinez':
+                print("LLEGO AL CRUD TRUE")
+                return True
+            else:
+                print("LLEGO AL CRUD FALSE")
+                return False
+        else:
+            print("Alguno de los datos recibidos es nulo")
+            return False
