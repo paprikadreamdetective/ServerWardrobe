@@ -1,5 +1,4 @@
-from controllers.ImageController import *
-from controllers.AuthController import *
+
 from flask import Flask
 from flask_cors import CORS
 
