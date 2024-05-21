@@ -1,11 +1,13 @@
-import json
-from pathlib import Path
+from .WardrobeOutfitComposite import WardrobeOutfitComposite
 
-#from objectCreation.AbstractFactoryOutfits.SummerOutfitFactory import SummerOutfitFactory 
 
 from objectCreation.AbstractFactoryOutfits.SummerOutfitFactory import SummerOutfitFactory
 from objectCreation.AbstractFactoryOutfits.WinterOutfitFactory import WinterOutfitFactory
 from objectCreation.AbstractFactoryOutfits.AbstractOutfitFactory import wear_outfit
+
+from pathlib import Path
+import json
+
 # ---------- Abstract Factory ----------
 def clean_data(data: dict) -> list:
     clothe_list = [{}, {}, {}, {}]
@@ -18,6 +20,7 @@ def clean_data(data: dict) -> list:
 
 
 if __name__ == "__main__":
+    wardrobe_outfit_composite = WardrobeOutfitComposite()
 
     #*** Abstract Factory ***
     with open(Path("./services/db/example.json")) as f:
@@ -25,7 +28,24 @@ if __name__ == "__main__":
     clothes_list = clean_data(data)
 
     summer_factory = SummerOutfitFactory(clothes_list)
-    wear_outfit(summer_factory)
-
     winter_factory = WinterOutfitFactory(clothes_list)
-    wear_outfit(winter_factory)
+
+    wardrobe_outfit_composite.add(summer_factory.create_casual_outfit())
+    wardrobe_outfit_composite.add(summer_factory.create_formal_outfit())
+    wardrobe_outfit_composite.add(winter_factory.create_casual_outfit())
+    wardrobe_outfit_composite.add(winter_factory.create_formal_outfit())
+    
+    wardrobe_outfit_composite.add(summer_factory.create_random_outfit())
+
+    wardrobe_outfit_composite.execute()
+
+    '''
+    winter_factory = WinterOutfitFactory(clothes_list)
+
+    
+    '''
+    
+    #wear_outfit(summer_factory)
+
+    
+    #wear_outfit(winter_factory)

@@ -1,7 +1,7 @@
 
 from model.Authenticate.authManager import user_auth_email, user_register_email, user_auth_username,user_register_username
 from model.CaptureClothe.imageManager import sendPictureToPI
-#from model.Weather.weatherManager import getCurrentWeather
+from model.Weather.weatherManager import getCurrentWeather
 # from model.CreateOutfit.cliente import create_outfit
 
 import os

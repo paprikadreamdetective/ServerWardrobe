@@ -29,7 +29,7 @@ class AbstractOutfitFactory(ABC):
         outfit['shoes'].update({ramdom_outfit[2]: clothes_list[2][ramdom_outfit[2]]})
         outfit['accessory'].update({ramdom_outfit[3]: clothes_list[3][ramdom_outfit[3]]})
 
-        return outfit
+        return str(outfit)
     
 def wear_outfit(factory: AbstractOutfitFactory):
     casual_outfit = factory.create_casual_outfit()
