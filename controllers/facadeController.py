@@ -1,7 +1,7 @@
 
-from model.Authenticate.authManager import user_auth, user_register_email, user_auth_username, user_register_username
+from model.Authenticate.authManager import user_auth_email, user_register_email, user_auth_username,user_register_username
 from model.CaptureClothe.imageManager import sendPictureToPI
-from model.Weather.weatherManager import getCurrentWeather
+#from model.Weather.weatherManager import getCurrentWeather
 # from model.CreateOutfit.cliente import create_outfit
 
 import os
@@ -15,12 +15,12 @@ def login():
     email = request.json['email']
     password = request.json['password']
     print("Recv data: " + str(email) + " : " + str(password))
-    if user_auth(email, password):
+    if user_auth_email(email, password):
         print("Datos correctos")
-        return jsonify({'success': True, 'message': 'Login successful'})
+        return jsonify({'success': 200, 'message': 'Login successful'})
     else:
         print("Datos incorrectos")
-        return jsonify({'success': False, 'message': 'Invalid credentials'})
+        return jsonify({'success': 500, 'message': 'Invalid credentials'})
 
 @app.route('/register_email', methods=['POST'])
 def register_email():
@@ -31,10 +31,10 @@ def register_email():
     print("Recv data: " + str(email) + " : " + str(password) + " : " + str(name) + " : " + str(lastname))
     if user_register_email(email, password, name, lastname):
         print("Datos correctos")
-        return jsonify({'success': True, 'message': 'Login successful'})
+        return jsonify({'success': 200, 'message': 'Login successful'})
     else:
         print("Datos incorrectos")
-        return jsonify({'success': False, 'message': 'Invalid credentials'})
+        return jsonify({'success': 500, 'message': 'Invalid credentials'})
 
 @app.route('/login_username', methods=['POST'])
 def login_username():
@@ -43,13 +43,14 @@ def login_username():
     print("Recv data: " + str(username) + " : " + str(password))
     if user_auth_username(username, password):
         print("Datos correctos")
-        return jsonify({'success': True, 'message': 'Login successful'})
+        return jsonify({'success': 200, 'message': 'Login successful'})
     else:
         print("Datos incorrectos")
-        return jsonify({'success': False, 'message': 'Invalid credentials'})
+        return jsonify({'success': 500, 'message': 'Invalid credentials'})
 
 @app.route('/register_username', methods=['POST'])
 def register_username():
+    print('ENTRA AL facade')
     username = request.json['username']
     password = request.json['password']
     name = request.json['name']
@@ -57,10 +58,10 @@ def register_username():
     print("Recv data: " + str(username) + " : " + str(password) + " : " + str(name) + " : " + str(lastname))
     if user_register_username(username, password, name, lastname):
         print("Datos correctos")
-        return jsonify({'success': True, 'message': 'Login successful'})
+        return jsonify({'success': 200, 'message': 'Register successful'})
     else:
         print("Datos incorrectos")
-        return jsonify({'success': False, 'message': 'Invalid credentials'})
+        return jsonify({'error': 500, 'message': 'Invalid register'})
 
 
 @app.route('/upload_picture', methods=['POST'])

@@ -1,7 +1,4 @@
 
-# import mysql
-#import json
-'''
 # UserCrud.py
 import sqlite3
 import json
@@ -15,17 +12,13 @@ from .UserServices import UserServices
 """
 
 class UserCrud(UserServices):
-    """
-    Define the real object that the proxy represents.
-    """
-    def _init_(self) -> None:
-        self._connection_db_user = self.conectar_bd()
+    def __init__(self) -> None:
+        self._connection_db_users = self.conectar_bd()
 
     def conectar_bd(self):
-        db_user_config = 'proyecto_pp.db'
+        db_user_config = 'proyecto_pp.bd'
         return sqlite3.connect(db_user_config)
 
-    # Función para cerrar la conexión a la base de datos
     def cerrar_bd(self, conn):
         conn.close()
 
@@ -35,7 +28,7 @@ class UserCrud(UserServices):
         else:
             return False
 
-    def user_register(self, username: str, name: str, lastname: str, password: str):
+    def username_register(self, username: str, password: str, name: str, lastname: str):
         try:
             # Construir el diccionario del usuario
             user = {
@@ -44,9 +37,9 @@ class UserCrud(UserServices):
                 'Apellido': lastname,
                 'Contrasena': password
             }
-
+            print('entra al CRUD')
             # Verificar si ya existe un usuario con el mismo nombre de usuario
-            conn = self._connection_db_user
+            conn = self._connection_db_users
             cursor = conn.cursor()
             query_select = "SELECT * FROM users WHERE username = ?"
             cursor.execute(query_select, (user['Usuario'],))
@@ -70,7 +63,7 @@ class UserCrud(UserServices):
             print('Error al insertar usuario por username', e)
             return 'Error al insertar usuario por username', 500
 
-    def email_register(self, email: str, name: str, lastname: str, password: str):
+    def email_register(self, email: str, password: str, name: str, lastname: str):
         try:
             # Construir el diccionario del usuario
             user = {
@@ -81,7 +74,7 @@ class UserCrud(UserServices):
             }
 
             # Verificar si ya existe un usuario con el mismo correo electrónico
-            conn = self._connection_db_user
+            conn = self._connection_db_users
             cursor = conn.cursor()
             query_select = "SELECT * FROM users WHERE email = ?"
             cursor.execute(query_select, (user['Correo'],))
@@ -114,7 +107,7 @@ class UserCrud(UserServices):
             }
 
             # Obtener la conexión a la base de datos
-            conn = self._connection_db_user
+            conn = self._connection_db_users
             cursor = conn.cursor()
 
             # Ejecutar una consulta para buscar al usuario por correo
@@ -150,7 +143,7 @@ class UserCrud(UserServices):
             }
 
             # Obtener la conexión a la base de datos
-            conn = self._connection_db_user
+            conn = self._connection_db_users
             cursor = conn.cursor()
 
             # Ejecutar una consulta para buscar al usuario por nombre de usuario
@@ -176,11 +169,10 @@ class UserCrud(UserServices):
         except Exception as e:
             print('Error al intentar iniciar sesión:', e)
             return 'Error al intentar iniciar sesión', 500
+
+
+
 '''
-
-
-from .UserServices import UserServices
-
 class UserCrud(UserServices):
     def __init__(self) -> None:
         pass
@@ -238,3 +230,4 @@ class UserCrud(UserServices):
         else:
             print("Alguno de los datos recibidos es nulo")
             return False
+'''
