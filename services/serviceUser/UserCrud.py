@@ -127,8 +127,8 @@ class UserCrud(UserServices):
                     print('Contraseña incorrecta para el usuario:', user['Correo'])
                     return 'Contraseña incorrecta', 401
             else:
-                print('Usuario no encontrado:', user['Correo'])
-                return 'Usuario no encontrado', 404
+                print('Correo no encontrado:', user['Correo'])
+                return 'Correono encontrado', 404
 
         except Exception as e:
             print('Error al intentar iniciar sesión:', e)

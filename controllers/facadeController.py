@@ -15,12 +15,13 @@ def login():
     email = request.json['email']
     password = request.json['password']
     print("Recv data: " + str(email) + " : " + str(password))
-    if user_auth_email(email, password):
+    result, status_code = user_auth_email(email, password)
+    if status_code == 200:
         print("Datos correctos")
-        return jsonify({'success': 200, 'message': 'Login successful'})
+        return jsonify({'success': 200, 'message': result}), status_code
     else:
         print("Datos incorrectos")
-        return jsonify({'success': 500, 'message': 'Invalid credentials'})
+        return jsonify({'success': status_code, 'message': result}), status_code
 
 @app.route('/register_email', methods=['POST'])
 def register_email():
@@ -41,12 +42,13 @@ def login_username():
     username = request.json['username']
     password = request.json['password']
     print("Recv data: " + str(username) + " : " + str(password))
-    if user_auth_username(username, password):
+    result, status_code = user_auth_username(username, password)
+    if status_code == 200:
         print("Datos correctos")
         return jsonify({'success': 200, 'message': 'Login successful'})
     else:
         print("Datos incorrectos")
-        return jsonify({'success': 500, 'message': 'Invalid credentials'})
+        return jsonify({'success': status_code, 'message': result}), status_code
 
 @app.route('/register_username', methods=['POST'])
 def register_username():
