@@ -2,7 +2,7 @@
 from model.Authenticate.authManager import user_auth_email, user_register_email, user_auth_username,user_register_username
 from model.CaptureClothe.imageManager import sendPictureToPI
 from model.Weather.weatherManager import getCurrentWeather
-# from model.CreateOutfit.cliente import create_outfit
+from model.CreateOutfit.gestorConjunto import create_outfit
 
 import os
 from app import app 
@@ -87,11 +87,13 @@ def get_current_weather():
         return jsonify(weather_info), 500
     return jsonify(weather_info)
 
-'''
+
 @app.route('/create_manual_outfit', methods=['POST'])
 def create_manual_outfit():
     create_outfit()
 
+    
+'''
 @app.route('/create_automatic_outfit', methods=['POST'])
 def generate_outfit():
     pass
