@@ -6,6 +6,7 @@ from flask import request, jsonify
 
 from model.Authenticate.authManager import user_auth, user_register_email, user_auth_username, user_register_username
 from model.CaptureClothe.imageManager import sendPictureToPI
+from model.Weather.weatherManager import getCurrentWeather
 # from model.CreateOutfit.cliente import create_outfit
 
 
@@ -75,6 +76,16 @@ def upload_picture():
     return jsonify({"message": "No file received"}), 400
  
 
+@app.route('/get_current_weather', methods=['GET'])
+def get_current_weather():
+    city = request.args.get('city')
+    if not city:
+        return jsonify({'error': 'City is required'}), 400
+    weather_info = getCurrentWeather(city)
+    if 'error' in weather_info:
+        return jsonify(weather_info), 500
+    return jsonify(weather_info)
+
 '''
 @app.route('/create_manual_outfit', methods=['POST'])
 def create_manual_outfit():
@@ -92,7 +103,5 @@ def get_clothe():
 def register():
     pass
 
-@app.route('/get_current_weather', methods=['GET'])
-def get_current_weather():
-    pass
+
 '''
