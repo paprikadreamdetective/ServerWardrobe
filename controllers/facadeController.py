@@ -6,7 +6,7 @@ from flask import request, jsonify
 
 from model.Authenticate.authManager import user_auth, user_register_email, user_auth_username, user_register_username
 from model.CaptureClothe.imageManager import sendPictureToPI
-from model.CreateOutfit.cliente import create_outfit
+# from model.CreateOutfit.cliente import create_outfit
 
 
 @app.route('/login_email', methods=['POST'])
@@ -74,6 +74,8 @@ def upload_picture():
             return jsonify({"message": "Image received but failed to forward", "error": "ERROR"}), 500
     return jsonify({"message": "No file received"}), 400
  
+
+'''
 @app.route('/create_manual_outfit', methods=['POST'])
 def create_manual_outfit():
     create_outfit()
@@ -93,3 +95,4 @@ def register():
 @app.route('/get_current_weather', methods=['GET'])
 def get_current_weather():
     pass
+'''
