@@ -1,0 +1,63 @@
+.input-register{
+    width: 272px;
+}
+
+.custom3 {
+    width: 272px;
+    --background: #393D3F;
+    --color: #ffffff;
+    --placeholder-color: #ffffff;
+    --placeholder-opacity: 0.8;
+
+    --border-color: #62929E;
+    --border-width: 15;
+    --border-style: solid;
+
+    --highlight-color-focused: #62929E;
+  
+    padding: 10px;
+
+    
+}
+
+.custom4 {
+    width: 300px;
+    --background: #393D3F;
+    --color: #ffffff;
+    --placeholder-color: #ffffff;
+    --placeholder-opacity: 0.8;
+
+    --border-color: #62929E;
+    --border-width: 15;
+    --border-style: solid;
+
+    --highlight-color-focused: #62929E;
+  
+    padding: 10px;
+
+
+}
+
+.custom5 {
+    width: 300px;
+    --background: #393D3F;
+    --color: #ffffff;
+    --placeholder-color: #ffffff;
+    --placeholder-opacity: 0.8;
+
+    --border-color: #62929E;
+    --border-width: 15;
+    --border-style: solid;
+
+    --highlight-color-focused: #62929E;
+  
+    padding: 10px;
+
+}
+
+.input-register,
+.custom3,
+.custom4,
+.custom5 {
+    margin-bottom: 2px;
+}
