@@ -2,7 +2,7 @@ from objectCreation.FactoryMethodClothes.factoryController import choose_creator
 
 class Slave_Zapatos:
     def __init__(self, tipo, color):
-        self._zapatos = choose_creator(tipo)
+        #self._zapatos = choose_creator(tipo)
         self.tipo = tipo
         self.color = color
 

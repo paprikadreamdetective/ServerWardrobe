@@ -92,8 +92,8 @@ def get_current_weather():
 def create_manual_outfit():
     create_outfit()
 
-    
-'''
+
+
 @app.route('/create_automatic_outfit', methods=['POST'])
 def generate_outfit():
     pass
@@ -102,9 +102,3 @@ def generate_outfit():
 def get_clothe():
     pass
 
-@app.route('/register', methods=['POST'])
-def register():
-    pass
-
-
-'''
