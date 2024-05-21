@@ -1,13 +1,12 @@
-
-from model.Authenticate.authManager import user_auth_email, user_register_email, user_auth_username,user_register_username
-from model.CaptureClothe.imageManager import sendPictureToPI
-from model.Weather.weatherManager import getCurrentWeather
-from model.CreateOutfit.gestorConjunto import create_outfit
-
 import os
-from app import app 
 from flask import request, jsonify
+from app import app
 
+from model.authenticate.authManager import user_auth_email, user_register_email, user_auth_username,user_register_username
+from model.captureClothe.imageManager import sendPictureToPI
+from model.weather.weatherManager import getCurrentWeather
+from model.createOutfit.gestorConjunto import create_outfit
+from model.generateOutfit.generateOutfit import GenerateOutfit
 
 
 @app.route('/login_email', methods=['POST'])
@@ -77,7 +76,7 @@ def upload_picture():
         else:
             return jsonify({"message": "Image received but failed to forward", "error": "ERROR"}), 500
     return jsonify({"message": "No file received"}), 400
- 
+
 
 @app.route('/get_current_weather', methods=['GET'])
 def get_current_weather():
@@ -98,9 +97,9 @@ def create_manual_outfit():
 
 @app.route('/create_automatic_outfit', methods=['POST'])
 def generate_outfit():
-    pass
+    controller = GenerateOutfit()
+    controller.operation()
 
 @app.route('/get_clothe', methods=['GET'])
 def get_clothe():
     pass
-
