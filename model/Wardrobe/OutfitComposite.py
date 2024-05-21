@@ -1,14 +1,19 @@
-from composite import Composite
+from .Wardrobe import Wardrobe
+class OutfitComposite(Wardrobe): # Concrete Composite
+	def __init__(self):
+		self._children = []
 
-class OutfitComposite(Composite):
-    def operation(self) -> str:
-        """
-        The Composite executes its primary logic in a particular way. It
-        traverses recursively through all its children, collecting and summing
-        their results. Since the composite's children pass these calls to their
-        children and so forth, the whole object tree is traversed as a result.
-        """
-        results = []
-        for child in self._children:
-            results.append(child.operation())
-        return f"OutfitComposite({'+'.join(results)})"
+	def add(self, child):
+		self._children.append(child)
+
+	def remove(self, child):
+		self._children.remove(child)
+
+	def is_composite(self):
+		return True
+
+	def execute(self):
+		print('Outfit Composite')
+
+		for child in self._children:
+			child.execute()

@@ -2,5 +2,5 @@
 Patterns:
 - Master Slave
 - Adapter
-- Composite
+- Whole Part
 """
