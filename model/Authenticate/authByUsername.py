@@ -1,6 +1,6 @@
 import abc
 
-class authUsername:
+class authUsername(abc.ABC):
     @abc.abstractmethod
     def loginByUsername(self, username, password):
         pass

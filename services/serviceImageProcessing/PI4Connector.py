@@ -10,7 +10,6 @@ class PI4Connector(ImageProcessingService):
             files = {'file': (picture.filename, image_file, picture.content_type)}
             response = requests.Session().post(self._RASPBERRY_PI_SERVER_URL, files=files)
 
-        # Verificar la respuesta del servidor en la Raspberry Pi
         if response.status_code == 200:
             return True
             #return jsonify({"message": "Image received and forwarded successfully!", "file_path": file_path})

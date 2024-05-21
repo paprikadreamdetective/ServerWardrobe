@@ -4,7 +4,7 @@ import os
 from app import app 
 from flask import request, jsonify
 
-from model.Authenticate.authManager import user_auth, user_register_email, user_auth_username,user_register_username
+from model.Authenticate.authManager import user_auth, user_register_email, user_auth_username, user_register_username
 from model.CaptureClothe.imageManager import sendPictureToPI
 from model.CreateOutfit.cliente import create_outfit
 
