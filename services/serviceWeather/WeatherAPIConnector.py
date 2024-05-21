@@ -14,7 +14,7 @@ class WeatherAPI(WeatherService):
             })
             response.raise_for_status()
             data = response.json()
-            
+            '''
             weather_info = {
                 'city': data['name'],
                 'temperature': data['main']['temp'],
@@ -22,11 +22,11 @@ class WeatherAPI(WeatherService):
                 'humidity': data['main']['humidity'],
                 'wind_speed': data['wind']['speed']
             }
-            return weather_info
-
+            '''
+            return { 'city': data['name'], 'temperature': data['main']['temp'] }
         except requests.exceptions.RequestException as e:
             return {'error': str(e)}
-
+'''
 if __name__ == '__main__':
     city = input("Ingrese el nombre de la ciudad: ")
     weather = WeatherAPI().get_current_weather(city)
@@ -38,3 +38,4 @@ if __name__ == '__main__':
         print(f"Descripción: {weather['description']}")
         print(f"Humedad: {weather['humidity']}%")
         print(f"Velocidad del viento: {weather['wind_speed']} m/s")
+'''
