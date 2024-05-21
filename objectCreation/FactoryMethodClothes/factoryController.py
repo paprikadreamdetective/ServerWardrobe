@@ -1,9 +1,9 @@
-from objectCreation.factoryMethodClothes.CreatorButtom import CreatorButtom
-from objectCreation.factoryMethodClothes.CreatorTop import CreatorTop
-from objectCreation.factoryMethodClothes.CreatorShoes import CreatorShoes
-from objectCreation.factoryMethodClothes.CreatorAccessory import CreatorAccessory
-from objectCreation.factoryMethodClothes.Creator import client_factory
-from model.imageProcessing.process import process_image
+from objectCreation.FactoryMethodClothes.CreatorButtom import CreatorButtom
+from objectCreation.FactoryMethodClothes.CreatorTop import CreatorTop
+from objectCreation.FactoryMethodClothes.CreatorShoes import CreatorShoes
+from objectCreation.FactoryMethodClothes.CreatorAccessory import CreatorAccessory
+#from objectCreation.FactoryMethodClothes.Creator import client_factory
+#from model.imageProcessing.process import process_image
 
 
 def choose_creator(clothe_class):
@@ -16,10 +16,11 @@ def choose_creator(clothe_class):
     elif clothe_class == "hat":
         return CreatorAccessory()
 
-
+'''
 if __name__ == "__main__":
     # *** Factory Method ***
     image_w_back = "images/outputs/pantalon_w_back.png"
     clothe_class = process_image("images/inputs/pantalones.jpg", image_w_back)
     # print(clothe_class)
     client_factory(choose_creator(clothe_class), image_w_back, clothe_class)
+'''

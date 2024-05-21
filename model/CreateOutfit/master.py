@@ -1,7 +1,7 @@
-from prenda_superior import Slave_PrendaSuperior
-from prenda_inferior import Slave_PrendaInferior
-from accesorios import Slave_Accesorios
-from zapatos import Slave_Zapatos
+from .prenda_superior import Slave_PrendaSuperior
+from .prenda_inferior import Slave_PrendaInferior
+from .accesorios import Slave_Accesorios
+from .zapatos import Slave_Zapatos
 
 class Master_ConjuntoRopa:
     def __init__(self, sel_PrendaSuperior, sel_PrendaInferior, sel_Accesorios, sel_Zapatos):
