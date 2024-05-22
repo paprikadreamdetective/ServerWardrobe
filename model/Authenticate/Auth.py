@@ -76,7 +76,7 @@ def auth_email(email: str, password: str):
     return authEmail().operation(email, password)
 
 def register_email(email: str, password: str, name: str, lastname: str):
-    return authEmailRegister().operacion(email, password, name, lastname)
+    return authEmailRegister().operation(email, password, name, lastname)
 
 def auth_username(username: str, password: str):
     return authAdapter().loginByUsername(username, password)
