@@ -2,11 +2,11 @@ import os
 from flask import request, jsonify
 from app import app
 from model.Authenticate.authManager import user_auth_email, user_register_email, user_auth_username,user_register_username
-from model.CaptureClothe.imageManager import sendPictureToPI
-from model.Weather.weatherManager import getCurrentWeather
-from model.CreateOutfit.gestorConjunto import create_outfit
-from model.Wardrobe.wardrobeManager import add_outfit
-from model.generateOutfit.generateOutfit import GenerateOutfit
+#from model.CaptureClothe.imageManager import sendPictureToPI
+#from model.Weather.weatherManager import getCurrentWeather
+#from model.CreateOutfit.gestorConjunto import create_outfit
+#from model.Wardrobe.wardrobeManager import add_outfit
+#from model.generateOutfit.generateOutfit import GenerateOutfit
 
 @app.route('/login_email', methods=['POST'])
 def login():
@@ -63,7 +63,7 @@ def register_username():
         print("Datos incorrectos")
         return jsonify({'error': 500, 'message': 'Invalid register'})
 
-
+'''
 @app.route('/upload_picture', methods=['POST'])
 def upload_picture():
     picture = request.files['file']
@@ -98,3 +98,4 @@ def generate_outfit():
 @app.route('/add_outfit', methods=['POST'])
 def add_outfit():
     add_outfit(request.json['type outfit'])
+'''

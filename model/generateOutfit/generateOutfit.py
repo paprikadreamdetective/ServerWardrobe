@@ -1,5 +1,5 @@
-from objectCreation.abstractFactoryOutfits.SummerOutfitFactory import SummerOutfitFactory
-from objectCreation.abstractFactoryOutfits.WinterOutfitFactory import WinterOutfitFactory
+from objectCreation.AbstractFactoryOutfits.SummerOutfitFactory import SummerOutfitFactory
+from objectCreation.AbstractFactoryOutfits.WinterOutfitFactory import WinterOutfitFactory
 import json
 from pathlib import Path
 from pprint import pprint
