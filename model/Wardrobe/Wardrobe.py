@@ -15,7 +15,6 @@ class Wardrobe(abc.ABC): # Abstract Component
 
 	def is_composite(self):
 		return False
-    
 	@abc.abstractmethod
 	def execute(self):
 		pass

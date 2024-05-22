@@ -1,51 +1,33 @@
 from .WardrobeOutfitComposite import WardrobeOutfitComposite
-
-
 from objectCreation.AbstractFactoryOutfits.SummerOutfitFactory import SummerOutfitFactory
 from objectCreation.AbstractFactoryOutfits.WinterOutfitFactory import WinterOutfitFactory
-from objectCreation.AbstractFactoryOutfits.AbstractOutfitFactory import wear_outfit
 
-from pathlib import Path
-import json
+wardrobe_outfit_composite = WardrobeOutfitComposite()
 
-# ---------- Abstract Factory ----------
-def clean_data(data: dict) -> list:
-    clothe_list = [{}, {}, {}, {}]
+def create_casual_summer_outfit():
+    global wardrobe_outfit_composite
+    wardrobe_outfit_composite.add(SummerOutfitFactory([]).create_casual_outfit())
 
-    categories = ["top", "buttom", "shoes", "accessory"]
-    for index, category in enumerate(categories):
-        for item, details in data["clothes_user"][category].items():
-            clothe_list[index][item] = details[2]["color"]
-    return clothe_list
+def create_formal_summer_outfit():
+    global wardrobe_outfit_composite
+    wardrobe_outfit_composite.add(SummerOutfitFactory([]).create_formal_outfit())
 
+def create_casual_winter_outfit():
+    global wardrobe_outfit_composite
+    wardrobe_outfit_composite.add(WinterOutfitFactory([]).create_casual_outfit())
 
-if __name__ == "__main__":
-    wardrobe_outfit_composite = WardrobeOutfitComposite()
-
-    #*** Abstract Factory ***
-    with open(Path("./services/db/example.json")) as f:
-        data = json.load(f)
-    clothes_list = clean_data(data)
-
-    summer_factory = SummerOutfitFactory(clothes_list)
-    winter_factory = WinterOutfitFactory(clothes_list)
-
-    wardrobe_outfit_composite.add(summer_factory.create_casual_outfit())
-    wardrobe_outfit_composite.add(summer_factory.create_formal_outfit())
-    wardrobe_outfit_composite.add(winter_factory.create_casual_outfit())
-    wardrobe_outfit_composite.add(winter_factory.create_formal_outfit())
+def create_formal_winter_outfit():
+    global wardrobe_outfit_composite
+    wardrobe_outfit_composite.add(WinterOutfitFactory([]).create_formal_outfit())
+ 
+def add_outfit(_type):
+    global wardrobe_outfit_composite
     
-    wardrobe_outfit_composite.add(summer_factory.create_random_outfit())
-
-    wardrobe_outfit_composite.execute()
-
-    '''
-    winter_factory = WinterOutfitFactory(clothes_list)
-
-    
-    '''
-    
-    #wear_outfit(summer_factory)
-
-    
-    #wear_outfit(winter_factory)
+    if 'Summer Casual' == _type:
+        create_casual_summer_outfit()
+    elif 'Summer Formal' == _type:
+        create_formal_summer_outfit()
+    elif 'Winter Casual' == _type:
+        create_casual_winter_outfit()
+    elif 'Winter Formal' == _type:
+        create_formal_winter_outfit()

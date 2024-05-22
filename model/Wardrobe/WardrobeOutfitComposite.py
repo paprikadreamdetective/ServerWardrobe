@@ -1,5 +1,4 @@
 from .Wardrobe import Wardrobe
-from objectCreation.AbstractFactoryOutfits.Outfit import Outfit
 
 class WardrobeOutfitComposite(Wardrobe): # Concrete Composite
 	def __init__(self):
@@ -17,5 +16,5 @@ class WardrobeOutfitComposite(Wardrobe): # Concrete Composite
 	def execute(self):
 		print('Wardrobe Outfit Composite')
 		for child in self._children:
-			print(child)
+			print(child.wear())
 		
