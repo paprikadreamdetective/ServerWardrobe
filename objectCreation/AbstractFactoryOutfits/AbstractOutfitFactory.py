@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import random
 from pprint import pprint
-
+from .Outfit import Outfit
 class AbstractOutfitFactory(ABC):
     @abstractmethod
     def create_casual_outfit(self) -> 'Outfit':
