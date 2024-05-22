@@ -8,6 +8,7 @@ rembg = "*"
 ultralytics = "*"
 dill = "*"
 flask = "*"
+requests = "*"
 
 [dev-packages]
 

@@ -20,6 +20,7 @@ Aplicación de armario inteligente
 |      Proxy       |           Conexión a la base de datos            |
 |     Adapter      |               Registro del usuario               |
 |      Facade      |     Gestión de las vistas con el controlador     |
+|  Factory Method  |               Creación de Prendas                |
 
 ## Lenguajes y frameworks
 
@@ -29,9 +30,60 @@ Aplicación de armario inteligente
   - JavaScript
   - TypeScript
 
+## Comandos para correr el proyecto
+
+### Frontend
+
+```bash
+npm install -g @ionic/cli
+```
+
+```bash
+cd view
+npm install
+ionic serve
+```
+
+### Backend
+
+```python
+pip install pipenv
+```
+
+```python
+pipenv install
+```
+
+## Patrones de diseño
+
 ### Abstract Factory
 
 ![Diagrama de Abstract Fatory](./images/abstract.png)
+
+#### Ejecucion del patrón
+
+Desde el directorio raíz del proyecto
+
+```bash
+python -m model.generateOutfit.generateOutfit 
+```
+
+### Factory Method
+
+![Diagrama de Abstract Fatory](./images/factory.png)
+
+#### Ejecucion del patrón
+
+Desde el directorio raíz del proyecto, puede recivir un argumento la ruta de la imagen que se desea procesar y clasificar o por defecto se procesa una imagen de una [chamarra](./services/db/images/inputs/chamarra1.png)
+
+```bash
+python -m model.createClothe.createClothe <ruta_imagen>
+```
+
+```bash
+python -m model.createClothe.createClothe
+```
+
 
 ### Master Slave
 
