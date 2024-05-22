@@ -2,10 +2,10 @@ import os
 from flask import request, jsonify
 from app import app
 
-from model.authenticate.authManager import user_auth_email, user_register_email, user_auth_username,user_register_username
-from model.captureClothe.imageManager import sendPictureToPI
-from model.weather.weatherManager import getCurrentWeather
-from model.createOutfit.gestorConjunto import create_outfit
+from model.Authenticate.authManager import user_auth_email, user_register_email, user_auth_username,user_register_username
+from model.CaptureClothe.imageManager import sendPictureToPI
+from model.Weather.weatherManager import getCurrentWeather
+from model.CreateOutfit.gestorConjunto import create_outfit
 from model.generateOutfit.generateOutfit import GenerateOutfit
 
 

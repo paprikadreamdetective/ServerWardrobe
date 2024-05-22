@@ -1,4 +1,7 @@
 import abc 
+
+from services.serviceUser.ProxyUser import ProxyUser
+from services.serviceUser.UserCrud import UserCrud
 '''
 Interfaz que usaran las funcionalidades del
 adapter
@@ -9,51 +12,35 @@ class Auth(abc.ABC):
     def operation(self):
         pass
 '''
-registro correo
-'''
+
 class authEmailRegister(Auth):
-    def __init__(self) -> None:
-        '''
-        Aqui iria el proxy 
-        '''
+    def __init__(self, proxy: ProxyUser) -> None:
+        
         pass
 
     def operation(self, email, password, name, lastname):
         print('registro con email')
-'''
-login correo
-'''
 class authEmail(Auth):
     def __init__(self) -> None:
-        '''
-        Aqui iria el proxy 
-        '''
+        
         pass
 
     def operation(self, email, password):
         print('login con email')
-'''
-interface login usuario
-'''
+
 class authUsername(abc.ABC):
     @abc.abstractmethod    
     def loginByUsername(self):
         pass
-'''
-interface registro usuario
-'''
+
 class authUsernameRegister(abc.ABC):
     @abc.abstractmethod    
     def registerByUsername(self):
         pass
-'''
-registro extra
-'''
+
 class authAdapter(Auth, authUsername, authUsernameRegister):
     def __init__(self) -> None:
-        '''
-        Aqui iria el proxy 
-        '''
+        
         pass
 
     def operation(self):
@@ -66,11 +53,6 @@ class authAdapter(Auth, authUsername, authUsernameRegister):
         print('Registro con username')
 
 
-'''
-client: authManager.py
-
-
-'''
 
 def auth_email(email: str, password: str):
     return authEmail().operation(email, password)
@@ -83,3 +65,4 @@ def auth_username(username: str, password: str):
 
 def register_username(username: str, password: str, name: str, lastname: str):
     return authAdapter().registerByUsername(username, password, name, lastname)
+    '''
