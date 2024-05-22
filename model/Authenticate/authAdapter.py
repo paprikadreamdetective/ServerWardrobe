@@ -9,14 +9,9 @@ from .Auth import Auth
 from .authByUsername import authUsername
 from .authByUsernameRegister import authUsernameRegister
 from services.serviceUser.ProxyUser import ProxyUser
-'''
-registro extra
-'''
+
 class authAdapter(Auth, authUsername, authUsernameRegister):
     def __init__(self, proxy: ProxyUser) -> None:
-        '''
-        Aqui iria el proxy 
-        '''
         self._proxy = proxy
         
     def operation(self):
