@@ -47,4 +47,4 @@ Aplicación de armario inteligente
 
 ### Facade
 
-![Diagrama de Facade](./images/)
+![Diagrama de Facade](./images/facade.png)
