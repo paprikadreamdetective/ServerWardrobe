@@ -2,7 +2,7 @@ from objectCreation.FactoryMethodClothes.factoryController import choose_creator
 
 class Slave_PrendaSuperior:
     def __init__(self, tipo, color):
-        self._prenda_superior = choose_creator(tipo)
+        #self._prenda_superior = choose_creator(tipo)
         self.tipo = tipo
         self.color = color
 
