@@ -3,7 +3,7 @@ from rembg import remove
 
 
 def remove_backgroud_image(input_image, output_image):
-    if input_image.endswith(('.png', 'jpg', 'jpeg')):
+    if input_image.endswith(('.png', 'jpg', 'jpeg')): 
         with open(input_image, 'rb') as inp, open(output_image, 'wb') as outp:
             backgroud_output = remove(inp.read())
             outp.write(backgroud_output)
@@ -25,7 +25,7 @@ def do_detection(image) -> str:
         - skirt
         - t-shirt
     """
-    model = YOLO('model/clothes_classification.pt')
+    model = YOLO('./model/imageProcessing/clothes_classification.pt')
     results = model(image, verbose=False)
     for r in results:
         probs = r.probs
