@@ -100,3 +100,18 @@ python -m model.createClothe.createClothe
 ### Facade
 
 ![Diagrama de Facade](./images/facade.png)
+
+### Ejecucion de la aplicacion (backend)
+Una vez instalado Flask ubicado en la carpeta raiz del proyeto ejecute el comando 
+```bash
+python app.py 
+```
+o si se trata de un sistema unix:
+```
+python3 app.py
+```
+Este comando dara inicio al servicio web de la aplicacion, una vez iniciado el servicio web de la aplicacion, se pueden empezar a hacer peticiones desde las interfaces graficas de usuario de la aplicacion. El ejecutar este archivo es el que da inicio a la fachada, el cual funge como superoyente en el sistema.  El siguiente paso es ejecutar la aplicacion para empezar a hacer peticiones.
+### Ejecutar la vista de la aplicacion
+
+
+
