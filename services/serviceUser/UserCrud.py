@@ -1,5 +1,3 @@
-
-# UserCrud.py
 import sqlite3
 import json
 from flask import Flask, render_template, request, redirect, url_for, flash
