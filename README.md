@@ -112,6 +112,10 @@ python3 app.py
 ```
 Este comando dara inicio al servicio web de la aplicacion, una vez iniciado el servicio web de la aplicacion, se pueden empezar a hacer peticiones desde las interfaces graficas de usuario de la aplicacion. El ejecutar este archivo es el que da inicio a la fachada, el cual funge como superoyente en el sistema.  El siguiente paso es ejecutar la aplicacion para empezar a hacer peticiones.
 ### Ejecutar la vista de la aplicacion
-
+Ubicado en la carpeta "view", una vez instalado el framework Ionic y de haber instalado las dependencias correspondientes, podemos emplear el comando:
+```
+ionic serve
+```
+Una vez que la aplicacion se este ejecutando, se abrira una ventana en el navegador, donde se debera visualizar la "landing page" del sistema.
 
 
