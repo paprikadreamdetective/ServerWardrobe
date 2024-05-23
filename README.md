@@ -44,6 +44,8 @@ npm install
 ionic serve
 ```
 
+Una vez que la aplicacion se este ejecutando, se abrira una ventana en el navegador, donde se debera visualizar la *landing page* del sistema.
+
 ### Backend
 
 ```python
@@ -53,6 +55,12 @@ pip install pipenv
 ```python
 pipenv install
 ```
+
+```bash
+python app.py 
+```
+
+Este comando dara inicio al servicio web de la aplicacion, una vez iniciado el servicio web de la aplicacion, se pueden empezar a hacer peticiones desde las interfaces graficas de usuario de la aplicacion. El ejecutar este archivo es el que da inicio a la fachada, el cual funge como superoyente en el sistema.
 
 ## Patrones de diseño
 
@@ -68,13 +76,17 @@ Desde el directorio raíz del proyecto
 python -m model.generateOutfit.generateOutfit 
 ```
 
+O si se tiene corriendo el servidor de la aplicación de Flask, se puede ver la respuesta en la siguiente ruta:
+
+> [localhost:5000/generate_outfit](http://127.0.0.1:5000/generate_outfit)
+
 ### Factory Method
 
 ![Diagrama de Abstract Fatory](./images/factory.png)
 
 #### Ejecucion del patrón
 
-Desde el directorio raíz del proyecto, puede recivir un argumento la ruta de la imagen que se desea procesar y clasificar o por defecto se procesa una imagen de una [chamarra](./services/db/images/inputs/chamarra1.png)
+Desde el directorio raíz del proyecto, puede recivir un argumento la ruta de la imagen que se desea procesar y clasificar o por defecto se procesa una imagen de una [chamarra](./services/db/images/inputs/chamarra1.png). 
 
 ```bash
 python -m model.createClothe.createClothe <ruta_imagen>
@@ -85,37 +97,6 @@ python -m model.createClothe.createClothe
 ```
 
 
-### Master Slave
-
-![Diagrama de Master Slave](./images/)
-
-### Proxy
-
-![Diagrama de Proxy](./images/)
-
-### Adapter
-
-![Diagrama de Adapter](./images/)
-
 ### Facade
 
 ![Diagrama de Facade](./images/facade.png)
-
-### Ejecucion de la aplicacion (backend)
-Una vez instalado Flask ubicado en la carpeta raiz del proyeto ejecute el comando 
-```bash
-python app.py 
-```
-o si se trata de un sistema unix:
-```
-python3 app.py
-```
-Este comando dara inicio al servicio web de la aplicacion, una vez iniciado el servicio web de la aplicacion, se pueden empezar a hacer peticiones desde las interfaces graficas de usuario de la aplicacion. El ejecutar este archivo es el que da inicio a la fachada, el cual funge como superoyente en el sistema.  El siguiente paso es ejecutar la aplicacion para empezar a hacer peticiones.
-### Ejecutar la vista de la aplicacion
-Ubicado en la carpeta "view", una vez instalado el framework Ionic y de haber instalado las dependencias correspondientes, podemos emplear el comando:
-```
-ionic serve
-```
-Una vez que la aplicacion se este ejecutando, se abrira una ventana en el navegador, donde se debera visualizar la "landing page" del sistema.
-
-

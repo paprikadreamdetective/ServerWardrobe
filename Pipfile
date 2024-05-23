@@ -9,6 +9,7 @@ ultralytics = "*"
 dill = "*"
 flask = "*"
 requests = "*"
+flask-cors = "*"
 
 [dev-packages]
 
